@@ -1,3 +1,13 @@
+# CRA Redux + Typescript Template
+
+Modifications made by me in order to have multiple stores and fully typed.
+
+```bash
+
+git clone https://github.com/wilfredlopez/cra-ts-redux-template.git
+
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts

@@ -1,0 +1,54 @@
+.formContainer {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: auto;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin: 0.5rem;
+}
+.formControl label {
+  font-weight: 300;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.formActions {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.button:hover {
+  background-color: rgba(9, 58, 133, 0.8);
+}
+
+.button {
+  appearance: none;
+  background: none;
+  font-size: 1rem;
+  padding-left: 12px;
+  padding-right: 12px;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  color: rgb(255, 255, 255);
+  padding-bottom: 4px;
+  cursor: pointer;
+  background-color: rgba(9, 58, 133, 1);
+  border-radius: 2px;
+  transition: all 0.15s;
+  color: white;
+}
+
+.errorText {
+  font-size: 1rem;
+  text-align: right;
+  color: red;
+  margin: 0;
+  padding: 0;
+}

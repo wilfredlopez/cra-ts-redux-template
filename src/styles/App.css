@@ -1,0 +1,82 @@
+body,
+html {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.main-background {
+  background-color: rgb(79, 34, 138);
+}
+.main-color {
+  color: white;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: rgb(112, 76, 182);
+}
+a:hover {
+  color: rgb(137, 120, 172);
+}
+
+ul {
+  list-style: none;
+}
+.flex {
+  display: flex;
+}
+
+.py-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.px-1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+#app-root {
+  width: 100%;
+}
+#main-content {
+  min-height: 79.8vh;
+  display: block;
+  margin: 0 5px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  /* justify-content: center; */
+  /* font-size: calc(10px + 2vmin); */
+}
+
+@media (min-width: 700px) {
+  #main-content {
+    margin: 0 20px;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.not-found-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}

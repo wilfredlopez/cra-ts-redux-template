@@ -1,13 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { AppThunk, RootState } from "../../store"
+import { AppThunk, RootState } from "../store"
+import { Bug } from "models"
 
-export interface Bug {
-  id: string
-  title: string
-  reporter: string
-  date: string
-  resolved: boolean
-}
 interface BugsState {
   bugs: Bug[]
 }
@@ -28,25 +22,40 @@ export const bugsSlice = createSlice({
   name: "bugs",
   initialState,
   reducers: {
+    BugResolvedToggled: (state, { payload }: PayloadAction<{ id: string }>) => {
+      const index = state.bugs.findIndex((b) => b.id === payload.id)
+      if (index !== -1) {
+        state.bugs[index].resolved = !state.bugs[index].resolved
+      }
+    },
+    BugResolved: (state, { payload }: PayloadAction<{ id: string }>) => {
+      const index = state.bugs.findIndex((b) => b.id === payload.id)
+      if (index !== -1) {
+        state.bugs[index].resolved = true
+      }
+    },
     BudAdded: (state, action: PayloadAction<Bug>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-
-      const bugs = state.bugs.concat(action.payload)
-      state.bugs = bugs
+      state.bugs.push(action.payload)
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    BugRemoved: (state, action: PayloadAction<{ id: string }>) => {
-      state.bugs = state.bugs.filter((b) => b.id !== action.payload.id)
+    BugRemoved: (state, { payload }: PayloadAction<{ id: string }>) => {
+      // state.bugs =
+      const index = state.bugs.findIndex((b) => b.id === payload.id)
+      if (index !== -1) {
+        state.bugs.splice(index, 1)
+      }
+      // state.bugs.filter((b) => b.id !== payload.id)
     },
   },
 })
 
 const bugActions = bugsSlice.actions
 //private actions is prefered. that's why im not exporting it
-const { BugRemoved, BudAdded } = bugActions
+const { BugRemoved, BudAdded, BugResolved, BugResolvedToggled } = bugActions
 
 export type BugsActions = typeof bugActions
 
@@ -57,6 +66,7 @@ export const addTestBugsAsync = (amount: number): AppThunk => (dispatch) => {
     Array.from({ length: amount }, () => testBug).forEach((testBug, index) => {
       const bug = {
         ...testBug,
+        title: testBug.title + index,
         id: index + "test-gen-bug",
       }
 
@@ -81,6 +91,21 @@ export const addBug = (bug: Pick<Bug, "title" | "reporter">): AppThunk => (
 export const removeBug = (id: string): AppThunk => (dispatch) => {
   dispatch(
     BugRemoved({
+      id: id,
+    }),
+  )
+}
+
+export const resolveBug = (id: string): AppThunk => (dispatch) => {
+  dispatch(
+    BugResolved({
+      id: id,
+    }),
+  )
+}
+export const toggleResolved = (id: string): AppThunk => (dispatch) => {
+  dispatch(
+    BugResolvedToggled({
       id: id,
     }),
   )

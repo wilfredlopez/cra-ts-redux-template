@@ -33,18 +33,22 @@
   font-size: 1rem;
   padding-left: 12px;
   padding-right: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   outline: none;
   border-radius: 5px;
   border: 2px solid transparent;
   color: rgb(255, 255, 255);
-  padding-bottom: 4px;
+
   cursor: pointer;
   background-color: rgba(9, 58, 133, 1);
   border-radius: 2px;
   transition: all 0.15s;
   color: white;
 }
-
+.button:focus {
+  outline: 1px solid #1e88e5;
+}
 .errorText {
   font-size: 1rem;
   text-align: right;

@@ -1,5 +1,5 @@
 import React from "react"
-import { useStoreState } from "store/store"
+import { useBugsState } from "store/store"
 import { addTestBugsAsync } from "store/reducers"
 import { useDispatch } from "react-redux"
 import styles from "./Bugs.module.css"
@@ -8,25 +8,22 @@ import classes from "./Bugs.module.css"
 
 interface Props {}
 
-const Bugs = (props: Props) => {
-  const state = useStoreState()
+const Bugs = (_props: Props) => {
+  const bugsState = useBugsState()
   const dispatch = useDispatch()
-
-  function addTestSongs() {
-    dispatch(addTestBugsAsync(5))
+  const bugs = bugsState.bugs
+  function addTestBugs() {
+    dispatch(addTestBugsAsync(3))
   }
 
-  const bugs = state.bugs.bugs
-
   return (
-    <div>
+    <div className={classes.bugsPageContainer}>
       <h1 className={classes.title}>
-        Total Bugs{" "}
-        <span className={classes.count}>{state.bugs.bugs.length}</span>
+        Total Bugs <span className={classes.count}>{bugs.length}</span>
       </h1>
       <div>
         <section>
-          <button className={styles.asyncButton} onClick={addTestSongs}>
+          <button className={styles.asyncButton} onClick={addTestBugs}>
             Add Test Bugs Async
           </button>
         </section>

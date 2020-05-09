@@ -1,5 +1,5 @@
 import React from "react"
-import { addBug } from "store/reducers/bugs/bugsReducer"
+import { addBug } from "store/reducers/bugsReducer"
 import classes from "./addBugForm.module.css"
 import { useDispatch } from "react-redux"
 interface Props {}

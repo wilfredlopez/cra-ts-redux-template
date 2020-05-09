@@ -1,16 +1,30 @@
 .container {
   display: grid;
-  grid-template-columns: 4fr 3fr 1fr;
+  grid-template-columns: 5fr 3fr 1fr;
   grid-gap: 0.5em;
   border-bottom: 1px solid #c8c8c8;
   text-align: center;
-  max-width: 450px;
+  max-width: 560px;
   margin: auto;
   justify-content: center;
   align-items: center;
 }
 .reportedBy {
-  font-size: 10px;
+  font-size: 8px;
+}
+
+.titleArticle {
+  text-align: start;
+  position: relative;
+}
+
+.bugID {
+  font-size: 8px;
+  font-weight: bold;
+  color: #a600cb;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .deleteButton {
@@ -22,16 +36,26 @@
   background-color: rgba(202, 57, 57, 0.9);
   color: white;
   padding-bottom: 22px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
   display: flex;
   height: 25px;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: auto 2px;
   align-self: center;
   text-align: center;
   cursor: pointer;
+}
+
+.resolveButton {
+  composes: deleteButton;
+  background-color: rgba(57, 202, 202, 0.9);
+  color: white;
+}
+
+.actions {
+  display: flex;
 }
 
 .deleteButton:hover {
@@ -40,4 +64,14 @@
 .deleteButton:active {
   background-color: rgba(202, 57, 57, 0.95);
   color: rgb(241, 241, 241);
+}
+
+.resolveButton:hover {
+  background-color: rgba(40, 161, 161, 0.9);
+  color: white;
+}
+
+.resolveButton:active {
+  background-color: rgba(40, 161, 161, 0.9);
+  color: white;
 }

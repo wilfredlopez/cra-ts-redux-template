@@ -12,7 +12,7 @@ const BugItem = ({ bug }: Props) => {
 
   function remove() {
     console.log("bug", bug.id)
-    dispatch(removeBug({ id: bug.id }))
+    dispatch(removeBug(bug.id))
   }
   return (
     <div className={classes.container}>

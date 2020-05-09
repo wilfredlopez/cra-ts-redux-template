@@ -16,13 +16,15 @@ export const useBugsState = () =>
   useSelector<RootState, BugsState>((state) => state.bugs)
 
 export const useCountState = () => useSelector(selectCount)
+
+export const useThunkDispatch = () => useDispatch<typeof store.dispatch>()
+
 export type BugsState = ReturnType<typeof bugsReducer>
 export type RootState = ReturnType<typeof store.getState>
+
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
   unknown,
   Action<string>
 >
-
-export const useThunkDispatch = () => useDispatch<typeof store.dispatch>()

@@ -2,10 +2,10 @@
 export { default as bugsReducer } from "./bugs/bugsReducer"
 export {
   addTestBugsAsync,
-  addBug,
   removeBug,
   bugsSlice,
   selectBugs,
+  addBug,
 } from "./bugs/bugsReducer"
 
 // Counter

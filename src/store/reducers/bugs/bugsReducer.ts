@@ -6,6 +6,7 @@ export interface Bug {
   title: string
   reporter: string
   date: string
+  resolved: boolean
 }
 interface BugsState {
   bugs: Bug[]
@@ -16,6 +17,7 @@ const testBug: Bug = {
   date: new Date().toISOString(),
   reporter: "Wilfred",
   title: "Main menu doesnt open",
+  resolved: false,
 }
 
 const initialState: BugsState = {
@@ -26,36 +28,30 @@ export const bugsSlice = createSlice({
   name: "bugs",
   initialState,
   reducers: {
-    addBug: (state, action: PayloadAction<Omit<Bug, "date" | "id">>) => {
+    BudAdded: (state, action: PayloadAction<Bug>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      const date = new Date()
-      const newBug: Bug = {
-        ...action.payload,
-        date: date.toDateString(),
-        id: "bug-" + state.bugs.length + Math.random() + date.getTime(),
-      }
-      const bugs = state.bugs.concat(newBug)
+
+      const bugs = state.bugs.concat(action.payload)
       state.bugs = bugs
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    removeBug: (state, action: PayloadAction<{ id: string }>) => {
+    BugRemoved: (state, action: PayloadAction<{ id: string }>) => {
       state.bugs = state.bugs.filter((b) => b.id !== action.payload.id)
     },
   },
 })
 
 const bugActions = bugsSlice.actions
-export const { addBug, removeBug } = bugActions
+//private actions is prefered. that's why im not exporting it
+const { BugRemoved, BudAdded } = bugActions
 
 export type BugsActions = typeof bugActions
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
+// Actions to export
+
 export const addTestBugsAsync = (amount: number): AppThunk => (dispatch) => {
   setTimeout(() => {
     Array.from({ length: amount }, () => testBug).forEach((testBug, index) => {
@@ -63,14 +59,37 @@ export const addTestBugsAsync = (amount: number): AppThunk => (dispatch) => {
         ...testBug,
         id: index + "test-gen-bug",
       }
-      dispatch(addBug(bug))
+
+      dispatch(BudAdded(bug))
     })
   }, 1000)
 }
 
+export const addBug = (bug: Pick<Bug, "title" | "reporter">): AppThunk => (
+  dispatch,
+) => {
+  const date = new Date()
+  const newBug: Bug = {
+    ...bug,
+    date: date.toDateString(),
+    resolved: false,
+    id: "bug-" + date.getTime(),
+  }
+  dispatch(BudAdded(newBug))
+}
+
+export const removeBug = (id: string): AppThunk => (dispatch) => {
+  dispatch(
+    BugRemoved({
+      id: id,
+    }),
+  )
+}
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectBugs = (state: RootState) => state.bugs.bugs
+//example use:
+//const bugs = useSelector(selectBugs)
 
 export default bugsSlice.reducer

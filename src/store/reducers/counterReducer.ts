@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AppThunk, RootState } from "../store"
 
 interface CounterState {
-  value: number
+  readonly value: number
 }
 
 const initialState: CounterState = {

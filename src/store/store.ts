@@ -28,3 +28,12 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >
+
+
+// Usefull Types
+export type DeepReadOnlyObject<T> = {
+  readonly [P in keyof T]: DeepReadOnly<T[P]>;
+};
+export type DeepReadOnly<T> = T extends (infer E)[] ?
+  ReadonlyArray<DeepReadOnlyObject<E>> :
+  T extends object ? DeepReadOnlyObject<T> : T

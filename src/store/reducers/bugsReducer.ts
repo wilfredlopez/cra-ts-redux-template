@@ -3,7 +3,7 @@ import { AppThunk, RootState } from "../store"
 import { Bug } from "models"
 
 interface BugsState {
-  bugs: Bug[]
+  readonly bugs: Bug[]
 }
 
 const testBug: Bug = {
@@ -24,13 +24,15 @@ export const bugsSlice = createSlice({
   reducers: {
     BugResolvedToggled: (state, { payload }: PayloadAction<{ id: string }>) => {
       const index = state.bugs.findIndex((b) => b.id === payload.id)
-      if (index !== -1) {
+      if (index !== -1)
+      {
         state.bugs[index].resolved = !state.bugs[index].resolved
       }
     },
     BugResolved: (state, { payload }: PayloadAction<{ id: string }>) => {
       const index = state.bugs.findIndex((b) => b.id === payload.id)
-      if (index !== -1) {
+      if (index !== -1)
+      {
         state.bugs[index].resolved = true
       }
     },
@@ -45,7 +47,8 @@ export const bugsSlice = createSlice({
     BugRemoved: (state, { payload }: PayloadAction<{ id: string }>) => {
       // state.bugs =
       const index = state.bugs.findIndex((b) => b.id === payload.id)
-      if (index !== -1) {
+      if (index !== -1)
+      {
         state.bugs.splice(index, 1)
       }
       // state.bugs.filter((b) => b.id !== payload.id)
